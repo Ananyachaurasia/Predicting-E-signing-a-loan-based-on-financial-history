@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadAI - Predict</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Home
+                </a>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h1 class="logo-text">LeadAI</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main predict-main">
+        <div class="container">
+            <div class="predict-header">
+                <h2>Lead Quality Assessment</h2>
+                <p>Enter applicant details to predict response probability</p>
+            </div>
+
+            <div class="predict-grid">
+                <!-- Form Section -->
+                <div class="form-section">
+                    <form id="predictForm" action="/predict" method="POST">
+                        <!-- Applicant Details -->
+                        <div class="form-card">
+                            <h3 class="form-title">Applicant Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" name="age" value="30" min="18" max="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income">Annual Income</label>
+                                    <input type="number" id="income" name="income" value="50000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="years_employed">Years Employed</label>
+                                    <input type="number" id="years_employed" name="years_employed" value="2" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="current_address_year">Years at Current Address</label>
+                                    <input type="number" id="current_address_year" name="current_address_year" value="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount_requested">Amount Requested</label>
+                                    <input type="number" id="amount_requested" name="amount_requested" value="1000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="personal_account_months">Personal Account Months</label>
+                                    <input type="number" id="personal_account_months" name="personal_account_months" value="12" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inquiries_last_month">Inquiries Last Month</label>
+                                    <input type="number" id="inquiries_last_month" name="inquiries_last_month" value="0" min="0" max="50" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk & Quality Scores -->
+                        <div class="form-card">
+                            <h3 class="form-title">Risk & Quality Scores</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="risk_score">Risk Score 1</label>
+                                    <input type="number" id="risk_score" name="risk_score" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="risk_score_2">Risk Score 2</label>
+                                    <input type="number" id="risk_score_2" name="risk_score_2" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="risk_score_3">Risk Score 3</label>
+                                    <input type="number" id="risk_score_3" name="risk_score_3" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="risk_score_4">Risk Score 4</label>
+                                    <input type="number" id="risk_score_4" name="risk_score_4" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="risk_score_5">Risk Score 5</label>
+                                    <input type="number" id="risk_score_5" name="risk_score_5" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ext_quality_score">Ext Quality Score 1</label>
+                                    <input type="number" id="ext_quality_score" name="ext_quality_score" value="0" step="0.000000001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ext_quality_score_2">Ext Quality Score 2</label>
+                                    <input type="number" id="ext_quality_score_2" name="ext_quality_score_2" value="0" step="0.000000001" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Details -->
+                        <div class="form-card">
+                            <h3 class="form-title">Additional Details</h3>
+                            <div class="form-grid form-grid-3">
+                                <div class="form-group">
+                                    <label for="home_owner">Home Owner</label>
+                                    <select id="home_owner" name="home_owner" required>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="has_debt">Has Debt</label>
+                                    <select id="has_debt" name="has_debt" required>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pay_schedule">Pay Schedule</label>
+                                    <select id="pay_schedule" name="pay_schedule" required>
+                                        <option value="bi-weekly">Bi-weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="semi-monthly">Semi-monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Analyze Risk
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section">
+                    <div class="results-card">
+                        <h3 class="form-title">Prediction Results</h3>
+
+                        <div id="resultsContent" class="results-empty">
+                            <div class="empty-icon">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <p>Fill out the form and click "Analyze Risk" to see prediction results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Handle form submission
+        document.getElementById('predictForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                displayResults(result);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        function displayResults(result) {
+            const resultsContent = document.getElementById('resultsContent');
+            const probability = (result.probability * 100).toFixed(1);
+            const isHighProb = result.prediction === 1;
+
+            resultsContent.innerHTML = `
+                <div class="probability-display">
+                    <div class="probability-number">${probability}%</div>
+                    <div class="probability-label">Response Probability</div>
+                </div>
+
+                <div class="result-badge ${isHighProb ? 'result-success' : 'result-danger'}">
+                    <div class="result-badge-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${isHighProb ?
+                                '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline>' :
+                                '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline>'
+                            }
+                        </svg>
+                        <span>${isHighProb ? 'High Probability' : 'Low Probability'}</span>
+                    </div>
+                    <p>${isHighProb ?
+                        'This lead shows strong indicators of positive response. Recommended for priority follow-up.' :
+                        'This lead may require additional nurturing or may not be an ideal fit at this time.'
+                    }</p>
+                </div>
+
+                <div class="risk-level">
+                    <div class="risk-level-header">
+                        <span>Risk Level</span>
+                        <span>${isHighProb ? 'Low' : 'High'}</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill ${isHighProb ? 'progress-success' : 'progress-danger'}"
+                             style="width: ${probability}%"></div>
+                    </div>
+                </div>
+            `;
+
+            resultsContent.className = 'results-content';
+        }
+    </script>
+</body>
+</html>
