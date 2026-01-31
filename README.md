@@ -53,7 +53,6 @@ Therefore, predicting **e_signed** becomes a direct measure of **lead quality**.
 - Personal Account Months  
 - Inquiries in Last Month  
 
----
 
 ##  Risk & Quality Scores
 
@@ -61,7 +60,6 @@ Therefore, predicting **e_signed** becomes a direct measure of **lead quality**.
 - External Quality Score 1  
 - External Quality Score 2  
 
----
 
 ##  Additional Information
 
@@ -103,22 +101,23 @@ The LeadAI web interface allows users to:
 ### 🔹 Landing Page  
 ![Landing Page](home.png)
 
----
+
 
 ### 🔹 Applicant Data Input Form  
 ![Applicant Form](form.png)
 
----
+
 
 ### 🔹 Risk & Quality Score Entry  
 ![Risk Analysis](risk.png)
 
----
+
 
 ### 🔹 Prediction Result Output  
 ![Prediction Result](result.png)
 
 ---
+
 
 #  Use Case
 
